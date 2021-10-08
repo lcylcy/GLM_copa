@@ -1,0 +1,1 @@
+scripts/ds_finetune_superglue.sh: line 46: deepspeed: command not found

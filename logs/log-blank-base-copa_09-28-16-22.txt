@@ -1,0 +1,35 @@
+[2021-09-28 16:22:35,582] [WARNING] [runner.py:122:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2021-09-28 16:22:36,697] [INFO] [runner.py:360:main] cmd = /dataset/lichunyou/conda_env/miniconda3/envs/p7/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMF19 --master_addr=127.0.0.1 --master_port=28204 finetune_glm.py --deepspeed --deepspeed_config config_tasks/config_blocklm_10B.json --finetune --cloze-eval --experiment-name blank-base-copa_09-28-16-22 --task COPA --data-dir /dataset/lichunyou/GLM/GLM_copa/dataset/COPA --save /dataset/lichunyou/GLM/GLM_copa/copa_model --seq-length 256 --checkpoint-activations --eval-batch-size 4 --save-epoch 100000 --num-workers 1 --no-load-optim --no-load-lr-scheduler --block-lm --num-layers 12 --hidden-size 768 --num-attention-heads 12 --max-position-embeddings 512 --tokenizer-model-type bert-base-uncased --tokenizer-type BertWordPieceTokenizer --load-pretrained /dataset/lichunyou/GLM/GLM_copa/copa_model/blank-base-copa_08-25-23-55 --lr-decay-style linear --warmup 0.1 --weight-decay 1.0e-1 --pattern-id 0 --save-interval 10000 --log-interval 20 --eval-interval 1000 --eval-iters 100 --pattern-id 0 --fp16 --model-parallel-size 1 --epochs -1 --overwrite
+[2021-09-28 16:22:37,501] [INFO] [launch.py:73:main] 0 NCCL_IB_DISABLE 0
+[2021-09-28 16:22:37,501] [INFO] [launch.py:73:main] 0 NCCL_DEBUG info
+[2021-09-28 16:22:37,501] [INFO] [launch.py:73:main] 0 NCCL_NET_GDR_LEVEL 2
+[2021-09-28 16:22:37,502] [INFO] [launch.py:80:main] WORLD INFO DICT: {'localhost': [0]}
+[2021-09-28 16:22:37,502] [INFO] [launch.py:89:main] nnodes=1, num_local_procs=1, node_rank=0
+[2021-09-28 16:22:37,502] [INFO] [launch.py:101:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0]})
+[2021-09-28 16:22:37,502] [INFO] [launch.py:102:main] dist_world_size=1
+[2021-09-28 16:22:37,502] [INFO] [launch.py:105:main] Setting CUDA_VISIBLE_DEVICES=0
+Traceback (most recent call last):
+  File "finetune_glm.py", line 8, in <module>
+    from tasks.data_utils import build_data_loader, FakeDataloader
+  File "/dataset/lichunyou/GLM/GLM_copa/tasks/data_utils.py", line 29, in <module>
+    import mpu
+  File "/dataset/lichunyou/GLM/GLM_copa/mpu/__init__.py", line 50, in <module>
+    from .transformer import BertParallelSelfAttention
+  File "/dataset/lichunyou/GLM/GLM_copa/mpu/transformer.py", line 22, in <module>
+    from apex.normalization.fused_layer_norm import FusedLayerNorm as LayerNorm
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/site-packages/apex/__init__.py", line 13, in <module>
+    from pyramid.session import UnencryptedCookieSessionFactoryConfig
+ImportError: cannot import name 'UnencryptedCookieSessionFactoryConfig' from 'pyramid.session' (unknown location)
+Killing subprocess 2576233
+Traceback (most recent call last):
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/site-packages/deepspeed/launcher/launch.py", line 171, in <module>
+    main()
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/site-packages/deepspeed/launcher/launch.py", line 161, in main
+    sigkill_handler(signal.SIGTERM, None)  # not coming back
+  File "/dataset/lichunyou/conda_env/miniconda3/envs/p7/lib/python3.7/site-packages/deepspeed/launcher/launch.py", line 139, in sigkill_handler
+    raise subprocess.CalledProcessError(returncode=last_return_code, cmd=cmd)
+subprocess.CalledProcessError: Command '['/dataset/lichunyou/conda_env/miniconda3/envs/p7/bin/python', '-u', 'finetune_glm.py', '--local_rank=0', '--deepspeed', '--deepspeed_config', 'config_tasks/config_blocklm_10B.json', '--finetune', '--cloze-eval', '--experiment-name', 'blank-base-copa_09-28-16-22', '--task', 'COPA', '--data-dir', '/dataset/lichunyou/GLM/GLM_copa/dataset/COPA', '--save', '/dataset/lichunyou/GLM/GLM_copa/copa_model', '--seq-length', '256', '--checkpoint-activations', '--eval-batch-size', '4', '--save-epoch', '100000', '--num-workers', '1', '--no-load-optim', '--no-load-lr-scheduler', '--block-lm', '--num-layers', '12', '--hidden-size', '768', '--num-attention-heads', '12', '--max-position-embeddings', '512', '--tokenizer-model-type', 'bert-base-uncased', '--tokenizer-type', 'BertWordPieceTokenizer', '--load-pretrained', '/dataset/lichunyou/GLM/GLM_copa/copa_model/blank-base-copa_08-25-23-55', '--lr-decay-style', 'linear', '--warmup', '0.1', '--weight-decay', '1.0e-1', '--pattern-id', '0', '--save-interval', '10000', '--log-interval', '20', '--eval-interval', '1000', '--eval-iters', '100', '--pattern-id', '0', '--fp16', '--model-parallel-size', '1', '--epochs', '-1', '--overwrite']' returned non-zero exit status 1.
